@@ -25,6 +25,7 @@ type User struct {
 	PasswordHash    string    `json:"-" db:"password_hash"`
 	Password        string    `json:"-" db:"-"`
 	PasswordConfirm string    `json:"-" db:"-"`
+	Posts           Posts     `has_many:"posts"`
 }
 
 // Create validates and creates a new User.

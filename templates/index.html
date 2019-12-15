@@ -2,4 +2,12 @@
   <div class="col text-center">
       <h1>BUFFALO BUFFALO BUFFALO BUFFALO BLOG!</h1>
   </div>
+  <div class="container">
+    <%= for(p) in posts { %>
+      <hr>
+      <a href="<%= postsDetailPath({pid: p.ID}) %>"><h3><%= p.Title %></h3></a>
+      <p><%= markdown(truncate(p.Content, {"size": 200})) %></p>
+      <p><%= formatDate(p.CreatedAt) %> <span><%= p.Author.Username %></span></p>
+    <% } %>
+  </div>
 </div>

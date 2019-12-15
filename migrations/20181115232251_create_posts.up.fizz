@@ -3,4 +3,5 @@ create_table("posts") {
 	t.Column("title", "string", {})
 	t.Column("content", "text", {})
 	t.Column("author_id", "uuid", {})
+	t.Timestamps()
 }

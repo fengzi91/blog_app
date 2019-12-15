@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>Buffalo - Blog App</title>
+  <title>Buffalo - 我的博客</title>
   <%= stylesheetTag("application.css") %>
   <meta name="csrf-param" content="authenticity_token" />
   <meta name="csrf-token" content="<%= authenticity_token %>" />
@@ -13,7 +13,7 @@
 
 <body>
 
-  <div class="container">
+<div class="container-full">
     <!-- NavBar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
 <a class="navbar-brand" href="<%= rootPath() %>">Blog App</a>
@@ -42,7 +42,9 @@
 	</ul>
 </div>
 </nav>
-<!-- End NavBar -->
+  </div>
+<!-- End NavBar -->  
+  <div class="container">
     <%= partial("flash.html") %>
     <%= yield %>
   </div>

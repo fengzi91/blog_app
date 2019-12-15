@@ -1,6 +1,13 @@
 development:
-  dialect: "sqlite3"
-  database: /Users/joshuagrafton/go/src/github.com/GraftonJ/blog_app_blog_app_development.sqlite
+  dialect: "mysql"
+  database: default
+  user: default
+  password: secret
+  host: 127.0.0.1
+  pool: 5
+  port: 3306
+  #dialect: "sqlite3"
+  #database: /Users/joshuagrafton/go/src/github.com/GraftonJ/blog_app_blog_app_development.sqlite
 
 test:
   dialect: "sqlite3"
