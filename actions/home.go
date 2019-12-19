@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"github.com/GraftonJ/blog_app/models"
+	"github.com/fengzi91/goblog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"
@@ -23,5 +23,7 @@ func HomeHandler(c buffalo.Context) error {
 	c.Set("posts", posts)
 	// Add the paginator to the context so it can be used in the template.
 	c.Set("pagination", q.Paginator)
+
+	c.Set("title", "这里是首页")
 	return c.Render(200, r.HTML("index.html"))
 }

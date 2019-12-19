@@ -1,4 +1,4 @@
-module github.com/GraftonJ/blog_app
+module buffalo-blog
 
 go 1.13
 
