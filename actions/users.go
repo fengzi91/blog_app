@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"github.com/GraftonJ/blog_app/models"
+	"github.com/fengzi91/blog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/validate"

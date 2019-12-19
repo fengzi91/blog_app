@@ -1,9 +1,9 @@
 development:
   dialect: "mysql"
-  database: default
-  user: default
-  password: secret
-  host: 127.0.0.1
+  database: buffalo-blog
+  user: buffalo-blog
+  password: ataMtFjLpPSw5Ls2anVOUt2NkYd03l9w
+  host: 172.17.0.1
   pool: 5
   port: 3306
   #dialect: "sqlite3"
