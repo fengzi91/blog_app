@@ -1,4 +1,4 @@
-module buffalo-blog
+module github.com/fengzi91/blog_app
 
 go 1.13
 

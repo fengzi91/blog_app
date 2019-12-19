@@ -1,7 +1,8 @@
 package actions
 
 import (
-	"github.com/fengzi91/goblog_app/models"
+	"github.com/fengzi91/blog_app/models"
+	// "github.com/GraftonJ/blog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"

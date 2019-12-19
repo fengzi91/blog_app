@@ -1,7 +1,7 @@
 package grifts
 
 import (
-	"github.com/GraftonJ/blog_app/actions"
+	"github.com/fengzi91/blog_app/actions"
 	"github.com/gobuffalo/buffalo"
 )
 

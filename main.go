@@ -3,7 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/fengzi91/goblog_app/actions"
+	"github.com/fengzi91/blog_app/actions"
+	// "github.com/GraftonJ/blog_app/actions"
 )
 
 // main is the starting point for your Buffalo application.
