@@ -1,10 +1,9 @@
 development:
   dialect: "mysql"
-  database: buffalo-blog
-  user: buffalo-blog
+  database: buffalo_blog
+  user: buffalo_blog
   password: ataMtFjLpPSw5Ls2anVOUt2NkYd03l9w
-  host: 172.17.0.1
-  pool: 5
+  host: 127.0.0.1
   port: 3306
   #dialect: "sqlite3"
   #database: /Users/joshuagrafton/go/src/github.com/GraftonJ/blog_app_blog_app_development.sqlite
@@ -15,9 +14,8 @@ test:
 
 production:
   dialect: "mysql"
-  database: buffalo-blog
-  user: buffalo-blog
+  database: buffalo_blog
+  user: buffalo_blog
   password: ataMtFjLpPSw5Ls2anVOUt2NkYd03l9w
   host: 172.17.0.1
-  pool: 5
   port: 3306

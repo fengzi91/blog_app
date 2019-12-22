@@ -17,6 +17,8 @@ type Post struct {
 	Content   string    `json:"content" db:"content"`
 	AuthorID  uuid.UUID `json:"author_id" db:"author_id"`
 	Author    User      `belongs_to:"user"`
+	CategoryID  uuid.UUID `json:"category_id" db:"category_id"`
+	Category  Category  `belongs_to:"category"`
 }
 
 type Posts []Post

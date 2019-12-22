@@ -2,7 +2,6 @@ package actions
 
 import (
 	"github.com/fengzi91/blog_app/models"
-	// "github.com/GraftonJ/blog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"
@@ -17,7 +16,7 @@ func HomeHandler(c buffalo.Context) error {
 	// Default values are "page=1" and "per_page=20".
 	q := tx.PaginateFromParams(c.Params())
 	// Retrieve all Posts from the DB
-	if err := q.Eager().All(posts); err != nil {
+	if err := q.Eager().Order("created_at asc").All(posts); err != nil {
 		return errors.WithStack(err)
 	}
 	// Make posts available inside the html template

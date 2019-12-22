@@ -1,55 +1,28 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="zh">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
-  <title>Buffalo - 我的博客</title>
-  <%= stylesheetTag("application.css") %>
-  <meta name="csrf-param" content="authenticity_token" />
-  <meta name="csrf-token" content="<%= authenticity_token %>" />
-  <link rel="icon" href="<%= assetPath(" images/favicon.ico") %>">
-</head>
+    <title>Bootstrap 4 Blog Template For Developers</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <meta name="csrf-param" content="authenticity_token" />
+  	<meta name="csrf-token" content="<%= authenticity_token %>" />
+  	<link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
+    <!-- Theme CSS -->  
+    <%= stylesheetTag("application.css") %>
+</head> 
 
 <body>
-
-<div class="container-full">
-    <!-- NavBar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-<a class="navbar-brand" href="<%= rootPath() %>">Blog App</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-	<ul class="navbar-nav mr-auto">
-	<li class="nav-item">
-    <a class="nav-link" href="<%= postsIndexPath() %>">Posts</a>
-	</li>
-	</ul>
-	<ul class="navbar-nav">
-	<%= if (current_user) { %>
-		<li class="nav-item">
-		<a href="<%= usersLogoutPath() %>" class="nav-link">Logout</a>
-		</li>
-		<% } else { %>
-		<li class="nav-item">
-			<a href="<%= usersLoginPath() %>" class="nav-link">Login</a>
-		</li>
-		<li class="nav-item">
-			<a href="<%= usersRegisterPath() %>" class="nav-link">Register</a>
-		</li>
-	<% } %>
-	</ul>
-</div>
-</nav>
-  </div>
-<!-- End NavBar -->  
-  <div class="container">
-    <%= partial("flash.html") %>
-    <%= yield %>
-  </div>
-
-  <%= javascriptTag("application.js") %>
+<%= partial("header.html") %>
+    <div class="main-wrapper">
+        <%= partial("flash.html") %>
+        <%= yield %>
+    </div>
+<%= partial("footer.html")%>
+    <%= javascriptTag("application.js") %>
 </body>
-
-</html>
+</html> 

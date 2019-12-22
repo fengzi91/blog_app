@@ -119,3 +119,7 @@ func LoginRequired(next buffalo.Handler) buffalo.Handler {
 		return c.Redirect(302, "/")
 	}
 }
+
+func UsersIndex(c buffalo.Context) error {
+	return c.Render(200, r.HTML("users/index"))
+}

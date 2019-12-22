@@ -57,6 +57,8 @@ func App() *buffalo.App {
 		// Remove to disable this.
 		app.Use(popmw.Transaction(models.DB))
 		app.Use(SetCurrentUser)
+		// Add all category
+		app.Use(SetCategories)
 		// Setup and use translations:
 		app.Use(translations())
 
@@ -68,6 +70,7 @@ func App() *buffalo.App {
 		auth.GET("/login", UsersLoginGet)
 		auth.POST("/login", UsersLoginPost)
 		auth.GET("/logout", UsersLogout)
+		auth.GET("/index", UsersIndex)
 
 		postGroup := app.Group("/posts")
 		postGroup.GET("/index", PostsIndex)
@@ -85,6 +88,15 @@ func App() *buffalo.App {
 		commentsGroup.POST("/edit/{cid}", CommentsEditPost)
 		commentsGroup.GET("/delete/{cid}", CommentsDelete)
 
+		categoriesGroup := app.Group("/categories")
+		categoriesGroup.Use(LoginRequired)
+		categoriesGroup.POST("/create", CategoriesCreatePost)
+		categoriesGroup.GET("/create", CategoriesCreateGet)
+		categoriesGroup.GET("/edit/{cid}", CategoriesEditGet)
+		categoriesGroup.POST("/edit/{cid}", CategoriesEditPost)
+		categoriesGroup.GET("/index", CategoriesCreateIndex)
+		categoriesGroup.GET("/{slug}", CategoriesShow)
+		categoriesGroup.GET("/delete/{cid}", CategoriesDelete)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

@@ -27,6 +27,12 @@ func PostsIndex(c buffalo.Context) error {
 
 //Inserted
 func PostsCreateGet(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	categories := &models.Categories{}
+	if err := tx.All(categories); err != nil {
+		return errors.WithStack(err)
+	}
+	c.Set("categories", categories)
 	c.Set("post", &models.Post{})
 	return c.Render(200, r.HTML("posts/create"))
 }
@@ -62,6 +68,11 @@ func PostsCreatePost(c buffalo.Context) error {
 func PostsEditGet(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	post := &models.Post{}
+	categories := &models.Categories{}
+	if err := tx.All(categories); err != nil {
+		return errors.WithStack(err)
+	}
+	c.Set("categories", categories)
 	if err := tx.Find(post, c.Param("pid")); err != nil {
 		return c.Error(404, err)
 	}
@@ -110,7 +121,7 @@ func PostsDelete(c buffalo.Context) error {
 func PostsDetail(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	post := &models.Post{}
-	if err := tx.Find(post, c.Param("pid")); err != nil {
+	if err := tx.Eager("Category").Find(post, c.Param("pid")); err != nil {
 		return c.Error(404, err)
 	}
 	author := &models.User{}

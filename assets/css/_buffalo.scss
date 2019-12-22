@@ -79,6 +79,23 @@ table.table tbody tr td {
 	text-align: center;
 }
 
+.meta {
+    color: #8f8f8f;
+	font-size: 0.8125rem;
+	span:after {
+		content: "";
+		display: inline-block;
+		width: 3px;
+		height: 3px;
+		border-radius: 50%;
+		background: #8f8f8f;
+		margin-left: 0.5rem;
+		margin-right: 0.5rem;
+		position: relative;
+		top: -3px;
+	}
+}
+
 @media all and (max-width: 770px) {
 	.titles h1 {
 		font-size: 25px;
@@ -115,4 +132,15 @@ table.table tbody tr td {
 		margin-top: 5px;
 		display: block;
 	}
+}
+.blog-list {
+    .item {
+        .post-thumb {
+            max-width: 110px;
+            border-radius: 2px;
+		}
+		.title {
+			font-size: 1.275rem;
+		}
+	}	
 }

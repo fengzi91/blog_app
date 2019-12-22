@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row my-2">
+        <div class="col-md-3 offset-md-9">
+            <%= if (current_user.Admin) { %>
+            <a href="<%= categoriesCreatePath() %>" class="btn btn-primary">新建分类</a>
+            <% } %>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">排序</th>
+            <th scope="col">名称</th>
+            <th scope="col">别名（URL）</th>
+            <th scope="col">文章数</th>
+            <th scope="col">创建时间</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= for (c) in categories { %>
+            <tr>
+                <th scope="row"><%= c.Order %></th>
+                <td><%= c.Name %></td>
+                <td><%= c.Slug %></td>
+                <td><%= len(c.Posts) %></td>
+                <td><%= formatDate(c.CreatedAt) %></td>
+                <td>
+                    <a href="<%= categoryPath({slug: c.Slug})%>" class="btn btn-primary">查看</a>
+                    <%= if (current_user.Admin) { %>
+                    <a href="<%= editCategoriesPath({cid: c.ID}) %>" class="btn btn-primary">编辑</a>
+                    <a href="<%= categoriesDeletePath({cid: c.ID}) %>" class="btn btn-danger">删除</a>
+                    <% } %>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col">
+        <%= paginator(pagination) %>
+    </div>
+</div>
