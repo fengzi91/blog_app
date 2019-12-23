@@ -1,1 +1,1 @@
-add_column("categories", "order", "int", {"default": 0})
+add_column("categories", "orders", "int", {"default": 0})

@@ -28,7 +28,7 @@ CREATE TABLE `categories` (
   `slug` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `order` int(11) NOT NULL DEFAULT '0',
+  `orders` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -111,4 +111,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-22 16:13:52
+-- Dump completed on 2019-12-23 10:45:22

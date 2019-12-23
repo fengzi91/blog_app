@@ -89,14 +89,14 @@ func App() *buffalo.App {
 		commentsGroup.GET("/delete/{cid}", CommentsDelete)
 
 		categoriesGroup := app.Group("/categories")
-		categoriesGroup.Use(LoginRequired)
-		categoriesGroup.POST("/create", CategoriesCreatePost)
-		categoriesGroup.GET("/create", CategoriesCreateGet)
-		categoriesGroup.GET("/edit/{cid}", CategoriesEditGet)
-		categoriesGroup.POST("/edit/{cid}", CategoriesEditPost)
+		// categoriesGroup.Use(LoginRequired)
+		categoriesGroup.POST("/create", AdminRequired(CategoriesCreatePost))
+		categoriesGroup.GET("/create", AdminRequired(CategoriesCreateGet))
+		categoriesGroup.GET("/edit/{cid}", AdminRequired(CategoriesEditGet))
+		categoriesGroup.POST("/edit/{cid}", AdminRequired(CategoriesEditPost))
 		categoriesGroup.GET("/index", CategoriesCreateIndex)
 		categoriesGroup.GET("/{slug}", CategoriesShow)
-		categoriesGroup.GET("/delete/{cid}", CategoriesDelete)
+		categoriesGroup.GET("/delete/{cid}", AdminRequired(CategoriesDelete))
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

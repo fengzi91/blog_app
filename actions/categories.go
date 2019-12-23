@@ -66,7 +66,7 @@ func CategoriesCreatePost(c buffalo.Context) error {
 	// If there are no errors set a success message
 	c.Flash().Add("success", "分类创建成功.")
 	// and redirect to the index page
-	return c.Redirect(302, "/")
+	return c.Redirect(302, "/categories/index")
 }
 func CategoriesEditGet(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
@@ -148,7 +148,7 @@ func SetCategories(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		categories := &models.Categories{}
 		tx := c.Value("tx").(*pop.Connection)
-		err := tx.Order("`order` asc").Order("updated_at desc").All(categories)
+		err := tx.Order("`orders` asc").Order("updated_at desc").All(categories)
 		if err != nil {
 			return errors.WithStack(err)
 		}

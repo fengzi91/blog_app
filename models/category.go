@@ -15,7 +15,7 @@ type Category struct {
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Name   string    `json:"name" db:"name"`
 	Slug   string    `json:"slug" db:"slug"`
-	Order  int 		 `json:"order" db:"order"`
+	Orders  int 		 `json:"orders" db:"orders"`
 	Posts  Posts	 `has_many:"posts"`
 }
 

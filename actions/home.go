@@ -16,7 +16,7 @@ func HomeHandler(c buffalo.Context) error {
 	// Default values are "page=1" and "per_page=20".
 	q := tx.PaginateFromParams(c.Params())
 	// Retrieve all Posts from the DB
-	if err := q.Eager().Order("created_at asc").All(posts); err != nil {
+	if err := q.Eager().Scope(OrderByCreatedAt()).All(posts); err != nil {
 		return errors.WithStack(err)
 	}
 	// Make posts available inside the html template
@@ -26,4 +26,10 @@ func HomeHandler(c buffalo.Context) error {
 
 	c.Set("title", "这里是首页")
 	return c.Render(200, r.HTML("index.html"))
+}
+
+func OrderByCreatedAt() pop.ScopeFunc {
+	return func(q *pop.Query) *pop.Query {
+		return q.Order("created_at desc")
+	}
 }

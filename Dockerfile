@@ -1,5 +1,3 @@
-# This is a multi-stage Dockerfile and requires >= Docker 17.05
-# https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 FROM gobuffalo/buffalo:v0.13.5 as builder
 
 RUN mkdir -p $GOPATH/src/github.com/fengzi91/blog_app
@@ -10,6 +8,9 @@ ADD package.json .
 ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
+ENV GO111MODULES=on
+ENV GOPROXY=https://mirrors.aliyun.com/goproxy/
+#RUN go get ./...
 RUN go get $(go list ./... | grep -v /vendor/)
 RUN buffalo build --static -o /bin/app
 
@@ -22,8 +23,8 @@ WORKDIR /bin/
 COPY --from=builder /bin/app .
 
 # Uncomment to run the binary in "production" mode:
-ENV GO_ENV=development
 # ENV GO_ENV=production
+#ENV GO_ENV=development
 # Bind the app to 0.0.0.0 so it can be seen from outside the container
 ENV ADDR=0.0.0.0
 

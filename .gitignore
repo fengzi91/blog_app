@@ -12,3 +12,4 @@ blog_app
 .vscode/
 .grifter/
 .env
+database.yml
