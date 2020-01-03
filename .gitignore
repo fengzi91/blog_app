@@ -13,3 +13,4 @@ blog_app
 .grifter/
 .env
 database.yml
+public/uploads/*.*

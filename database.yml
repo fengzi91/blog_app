@@ -1,12 +1,6 @@
 development:
-  dialect: "mysql"
-  database: buffalo_blog
-  user: buffalo_blog
-  password: ataMtFjLpPSw5Ls2anVOUt2NkYd03l9w
-  host: 127.0.0.1
-  port: 3306
-  #dialect: "sqlite3"
-  #database: /Users/joshuagrafton/go/src/github.com/GraftonJ/blog_app_blog_app_development.sqlite
+  dialect: "sqlite3"
+  database: /Users/zys/Code/Go/src/github.com/fengzi91/blog_app_development.sqlite
 
 test:
   dialect: "sqlite3"
