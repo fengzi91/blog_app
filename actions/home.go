@@ -5,6 +5,7 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
 	"github.com/pkg/errors"
+	"strings"
 )
 
 // HomeHandler is a default handler to serve up
@@ -32,4 +33,30 @@ func OrderByCreatedAt() pop.ScopeFunc {
 	return func(q *pop.Query) *pop.Query {
 		return q.Order("created_at desc")
 	}
+}
+
+func SetCurrentRouter(next buffalo.Handler) buffalo.Handler {
+	return func(c buffalo.Context) error {
+		path := c.Value("current_route").(buffalo.RouteInfo).PathName
+		var newPath string
+		newPath = snakeString((strings.Replace(path,"Path" ,"-page", 1)))
+		c.Set("current_path_class", newPath)
+		return next(c)
+	}
+}
+func snakeString(s string) string {
+	data := make([]byte, 0, len(s)*2)
+	j := false
+	num := len(s)
+	for i := 0; i < num; i++ {
+		d := s[i]
+		if i > 0 && d >= 'A' && d <= 'Z' && j {
+			data = append(data, '-')
+		}
+		if d != '_' {
+			j = true
+		}
+		data = append(data, d)
+	}
+	return strings.ToLower(string(data[:]))
 }

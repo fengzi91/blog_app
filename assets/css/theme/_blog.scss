@@ -95,7 +95,7 @@
 	}
 	.blog-post-body {
 		p, li {
-			font-size: 1.125rem;
+			font-size: 1rem;
 			line-height: 1.6;
 		}
         h1 {
@@ -116,6 +116,17 @@
         h6 {
 	        font-size: 1.125rem;
         }
+		img {
+			max-width: 560px;
+		}
+		table {
+			border: 1px solid #9d9d9d;
+			margin: 1rem 0;
+			td,th {
+				border: 1px solid #9d9d9d;
+				padding: 1rem;
+			}
+		}
 	}
 	.image-caption {
 		color: $theme-text-color-light;
@@ -136,5 +147,46 @@
 			font-size: 1.5rem;
 		}
 		
+	}
+}
+.posts-create-page, .posts-edit-page {
+	.post-edit-top-image {
+		width: 176px;
+		height: 176px;
+		border: 1px dashed #9d9d9d;
+		position: relative;
+		input {
+			width: 174px;
+			height: 174px;
+			opacity: 0;
+			position: absolute;
+			z-index: 9;
+			cursor: pointer;
+		}
+		.upload-icon {
+			width: 174px;
+			height: 174px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			.fa-upload {
+				font-size: 200%;
+			}
+		}
+		.preview-image {
+			width: 174px;
+			height: 174px;
+			z-index: 2;
+			img {
+				width: 100%;
+				height: 100%;
+				height: 100%;
+			}
+		}
 	}
 }

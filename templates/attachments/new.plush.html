@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>New Attachment</h1>
+</div>
+
+<%= formFor(attachment, {action: attachmentsPath(), method: "POST"}) { %>
+  <%= partial("attachments/form.html") %>
+  <%= linkTo(attachmentsPath(), {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
+<% } %>

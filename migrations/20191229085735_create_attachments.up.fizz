@@ -1,0 +1,6 @@
+create_table("attachments") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("author_id", "uuid", {})
+	t.Column("url", "string", {})
+	t.Column("size", "int", {})
+}

@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+	"github.com/pkg/errors"
 	"time"
 
 	"github.com/gobuffalo/pop"
@@ -19,6 +21,8 @@ type Post struct {
 	Author    User      `belongs_to:"user"`
 	CategoryID  uuid.UUID `json:"category_id" db:"category_id"`
 	Category  Category  `belongs_to:"category"`
+	TopImageID uuid.UUID `json:"attachment_id" db:"attachment_id"`
+	TopImage Attachment `belongs_to:"attachment"`
 }
 
 type Posts []Post
@@ -29,4 +33,10 @@ func (p *Post) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: p.Title, Name: "Title"},
 		&validators.StringIsPresent{Field: p.Content, Name: "Content"},
 	), nil
+}
+
+func (p *Post) AfterFind(tx *pop.Connection) error {
+	fmt.Println("打印post")
+	fmt.Println(p.TopImage)
+	return errors.WithStack(nil)
 }

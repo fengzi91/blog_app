@@ -13,9 +13,9 @@
     </div>
 </div>
 <div class="row m-3 justify-content-center">
-    <div class="col-md-8 col-sm-10">
+    <div class="col-md-8 col-sm-10" style="position: relative;">
         <h2>Create a new post</h2>
-        <form action="<%= postsCreatePath() %>" method="POST">
+        <form action="<%= postsCreatePath() %>" method="POST" enctype="multipart/form-data" id="form">
             <%= csrf() %>
             <div class="form-group">
                 <label for="title">Title</label>
@@ -25,16 +25,54 @@
                 <label for="title">分类</label>
                 <select class="form-control" id="category" name="CategoryID">
                     <option value="0">请选择分类</option>
-                    <%= for (c) in categories { %>
+                    <%= for (c) in _categories { %>
                     <option value="<%= c.ID %>"><%= c.Name %></option>
                     <% } %>
                 </select>
             </div>
             <div class="form-group">
-                <label for="content">Content</label>
-                <textarea class="form-control" name="Content" id="content"  rows="20"><%= post.Content %></textarea>
+                <label for="title">题图</label>
+                <div class="post-edit-top-image">
+                    <input type="file" id="up" />
+                    <div class="upload-icon">
+                        <i class="fa fa-upload" aria-hidden="true" size="50"></i>
+                    </div>
+                    <div class="preview-image" id="preview-image">
+
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Publish</button>
+            <div class="form-group" style="z-index: 9; position: relative;">
+                <label for="content">Content</label>
+                <div id="editSection"></div>
+            </div>
+            <textarea style="display:none;" name="Content" id="content"><%= post.Content %></textarea>
+            <input type="hidden" name="TopImageID" id="attachment" value="0393a648-5a61-4954-8fe6-a13e8de97b23"/>
+            <button type="submit" class="btn btn-primary" id="submit">Publish</button>
         </form>
     </div>
 </div>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css" />
+<script>
+    var url = '<%= attachmentsPath() %>'
+
+    $('#up').change(function() {
+        var formData = new FormData();
+        formData.append('file', $('#up')[0].files[0]);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType:'json',
+        }).then(function(res) {
+            console.log(res)
+            $('#preview-image').html('<img src="' + res.url + '" />');
+            $('#attachment').val(res.id);
+        })
+    })
+</script>
+

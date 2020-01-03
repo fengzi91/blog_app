@@ -28,12 +28,17 @@ func CategoriesShow(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	category := &models.Category{}
 
-	if err := tx.Eager("Posts").Where("slug = (?)", c.Param("slug")).Last(category); err != nil {
+	if err := tx.Where("slug = (?)", c.Param("slug")).Last(category); err != nil {
+		return c.Error(404, err)
+	}
+	posts := &models.Posts{}
+	q := tx.PaginateFromParams(c.Params())
+	if err := q.Eager().Where("category_id = (?)", category.ID).All(posts); err != nil {
 		return c.Error(404, err)
 	}
 	c.Set("category", category)
-
-	c.Set("posts", category.Posts)
+	c.Set("posts", posts)
+	c.Set("pagination", q.Paginator)
 	return c.Render(200, r.HTML("categories/show"))
 }
 

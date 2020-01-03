@@ -1,0 +1,1 @@
+add_column("posts", "attachment_id", "uuid", {"default": "0393a648-5a61-4954-8fe6-a13e8de97b23"})

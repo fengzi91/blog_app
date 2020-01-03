@@ -26,6 +26,7 @@ type User struct {
 	Password        string    `json:"-" db:"-"`
 	PasswordConfirm string    `json:"-" db:"-"`
 	Posts           Posts     `has_many:"posts"`
+	Attachments		Attachments `has_many:"attachments"`
 }
 
 // Create validates and creates a new User.

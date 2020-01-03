@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"fmt"
 	"github.com/fengzi91/blog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
@@ -27,13 +28,9 @@ func PostsIndex(c buffalo.Context) error {
 
 //Inserted
 func PostsCreateGet(c buffalo.Context) error {
-	tx := c.Value("tx").(*pop.Connection)
-	categories := &models.Categories{}
-	if err := tx.All(categories); err != nil {
-		return errors.WithStack(err)
-	}
-	c.Set("categories", categories)
 	c.Set("post", &models.Post{})
+	fmt.Println("打印变量")
+	fmt.Println("%+v", c)
 	return c.Render(200, r.HTML("posts/create"))
 }
 
@@ -42,13 +39,28 @@ func PostsCreatePost(c buffalo.Context) error {
 	post := &models.Post{}
 	user := c.Value("current_user").(*models.User)
 	// Bind post to the html form elements
+	fmt.Println("程序运行到此处 ！")
 	if err := c.Bind(post); err != nil {
 		return errors.WithStack(err)
 	}
+	fmt.Println("程序没有运行到此处 已经报错！")
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
 	// Validate the data from the html form
 	post.AuthorID = user.ID
+	// attachment := &models.Attachment{}
+	/*
+	if attachment_id := c.Param("attachment"); attachment_id == "" {
+		if err := tx.Last(attachment); err != nil {
+			return errors.WithStack(err)
+		}
+	} else {
+		if err := tx.Find(attachment, attachment_id); err != nil {
+			return errors.WithStack(err)
+		}
+	}
+	 */
+
 	verrs, err := tx.ValidateAndCreate(post)
 	if err != nil {
 		return errors.WithStack(err)
@@ -68,11 +80,6 @@ func PostsCreatePost(c buffalo.Context) error {
 func PostsEditGet(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	post := &models.Post{}
-	categories := &models.Categories{}
-	if err := tx.All(categories); err != nil {
-		return errors.WithStack(err)
-	}
-	c.Set("categories", categories)
 	if err := tx.Find(post, c.Param("pid")); err != nil {
 		return c.Error(404, err)
 	}
@@ -145,4 +152,17 @@ func PostsDetail(c buffalo.Context) error {
 	}
 	c.Set("comments", comments)
 	return c.Render(200, r.HTML("posts/detail"))
+}
+
+func PostComments(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	comments := &models.Comments{}
+	q := tx.Where("post_id = (?)", c.Param("pid")).PaginateFromParams(c.Params())
+	if err := q.All(comments); err != nil {
+		return errors.WithStack(err)
+	}
+
+	c.Response().Header().Set("X-Pagination", q.Paginator.String())
+
+	return c.Render(200, r.JSON(comments))
 }

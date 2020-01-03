@@ -27,6 +27,9 @@ func init() {
 				str := createdAt.Format("2006-01-02")
 				return str
 			},
+			"html": func(s string) template.HTML {
+				return template.HTML(s)
+			},
 		},
 	})
 }

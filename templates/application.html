@@ -12,17 +12,18 @@
     <meta name="csrf-param" content="authenticity_token" />
   	<meta name="csrf-token" content="<%= authenticity_token %>" />
   	<link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
-    <!-- Theme CSS -->  
+    <!-- Theme CSS -->
+    <script src="https://cdn.bootcss.com/font-awesome/5.11.2/js/all.js"></script>
     <%= stylesheetTag("application.css") %>
-</head> 
+    <%= javascriptTag("application.js") %>
+</head>
 
-<body>
+<body class="<%= current_path_class %>">
 <%= partial("header.html") %>
     <div class="main-wrapper">
         <%= partial("flash.html") %>
         <%= yield %>
     </div>
-<%= partial("footer.html")%>
-    <%= javascriptTag("application.js") %>
+    <%= partial("footer.html")%>
 </body>
-</html> 
+</html>

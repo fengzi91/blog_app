@@ -59,6 +59,7 @@ func App() *buffalo.App {
 		app.Use(SetCurrentUser)
 		// Add all category
 		app.Use(SetCategories)
+		app.Use(SetCurrentRouter)
 		// Setup and use translations:
 		app.Use(translations())
 
@@ -77,6 +78,7 @@ func App() *buffalo.App {
 		postGroup.GET("/create", AdminRequired(PostsCreateGet))
 		postGroup.POST("/create", AdminRequired(PostsCreatePost))
 		postGroup.GET("/detail/{pid}", PostsDetail)
+		postGroup.GET("/comments/{pid}", PostComments)
 		postGroup.GET("/edit/{pid}", AdminRequired(PostsEditGet))
 		postGroup.POST("/edit/{pid}", AdminRequired(PostsEditPost))
 		postGroup.GET("/delete/{pid}", AdminRequired(PostsDelete))
@@ -97,6 +99,11 @@ func App() *buffalo.App {
 		categoriesGroup.GET("/index", CategoriesCreateIndex)
 		categoriesGroup.GET("/{slug}", CategoriesShow)
 		categoriesGroup.GET("/delete/{cid}", AdminRequired(CategoriesDelete))
+		sysGruop := app.Group("setting")
+
+		sysGruop.GET("/systemsetting/create", AdminRequired(SystemsettingCreate))
+		sysGruop.GET("/systemsetting/edit", AdminRequired(SystemsettingEdit))
+		app.Resource("/attachments", AttachmentsResource{})
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

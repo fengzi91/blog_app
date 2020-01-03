@@ -1,0 +1,6 @@
+- id: "attachment.created.success"
+  translation: "Attachment was successfully created."
+- id: "attachment.updated.success"
+  translation: "Attachment was successfully updated."
+- id: "attachment.destroyed.success"
+  translation: "Attachment was successfully destroyed."

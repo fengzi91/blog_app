@@ -3,7 +3,7 @@
       <%= for(p) in posts { %>
       <div class="item mb-5">
         <div class="media">
-          <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="http://demo.demohuo.top/modals/59/5962/demo/assets/images/blog/blog-post-thumb-1.jpg" alt="image">
+          <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="<%= p.TopImage.Url %>" alt="image">
           <div class="media-body">
             <h3 class="title mb-1"><a href="<%= postsDetailPath({pid: p.ID}) %>"><%= p.Title %></a></h3>
             <div class="meta mb-1"><span class="date">Published <%= formatDate(p.CreatedAt) %></span><span class="time"><%= p.Author.Username %></span><span class="comment"><a href="#">8 comments</a></span></div>
@@ -13,5 +13,8 @@
         </div>
       </div>
       <% } %>
+    </div>
+    <div class="container">
+        <%= paginator(pagination) %>
     </div>
   </section>

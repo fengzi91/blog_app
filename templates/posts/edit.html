@@ -25,7 +25,7 @@
                 <label for="title">分类</label>
                 <select class="form-control" id="category" name="CategoryID">
                     <option value="0">请选择分类</option>
-                    <%= for (c) in categories { %>
+                    <%= for (c) in _categories { %>
                         <%= if (c.ID.String() == post.CategoryID.String()) { %>
                         <option value="<%= c.ID %>" selected><%= c.Name %></option>
                         <% } else { %>
@@ -36,9 +36,47 @@
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea class="form-control" name="Content" id="content"  rows="20"><%= post.Content %></textarea>
+                <div id="content">
+                    <textarea class="form-control" name="Content" style="display: none;"><%= post.Content %></textarea>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
 </div>
+
+<script src="/assets/editor/editormd.min.js"></script>
+<link href="/assets/editor/css/editormd.css" type="text/css" rel="stylesheet" />
+<script>
+    var url = '<%= attachmentsPath() %>'
+
+    $('#up').click(function() {
+        var formData = new FormData();
+        formData.append('file', $('#file')[0].files[0]);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType:'json',
+        })
+    })
+    var editor;
+    $(function() {
+        editor = editormd("content", {
+            width           : "100%",
+            height      : 740,
+            htmlDecode      : "style,script,iframe",
+            tex             : true,
+            emoji           : true,
+            taskList        : true,
+            flowChart       : true,
+            sequenceDiagram : true,
+            path   : "/assets/editor/lib/",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "<%= attachmentsPath() %>",
+        });
+    })
+</script>
