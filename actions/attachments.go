@@ -209,4 +209,5 @@ func (v AttachmentsResource) Add(c buffalo.Context) error {
   }
   */
   fmt.Println(c.Params())
+  return c.Render(200, r.Auto(c, "OK"))
 }
