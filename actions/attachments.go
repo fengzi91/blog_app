@@ -222,7 +222,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   if errs != nil {
     fmt.Println("JsonToMapDemo err: ", errs)
   }
-  fmt.Println(mapResult)
+  fmt.Println(mapResult["Upload"])
   return c.Render(200, r.JSON(c.Params()))
 }
 
