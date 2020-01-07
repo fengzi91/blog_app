@@ -1,11 +1,11 @@
 package actions
 
 import (
-  "encoding/json"
   "fmt"
+  "github.com/fengzi91/blog_app/models"
   "github.com/gobuffalo/buffalo"
   "github.com/gobuffalo/pop"
-  "github.com/fengzi91/blog_app/models"
+  "io/ioutil"
   "reflect"
 )
 
@@ -209,11 +209,16 @@ func AttachmentsAdd(c buffalo.Context) error {
     return fmt.Errorf("no transaction found")
   }
   */
-  fmt.Println(reflect.TypeOf(c.Request().Body))
+
   fmt.Println(c.Request().Body)
 
-  jsonData := json.NewDecoder(c.Request().Body)
-  fmt.Println(*jsonData)
-
+  // jsonData := json.NewDecoder(c.Request().Body)
+  body, err := ioutil.ReadAll(c.Request().Body)
+  if err != nil {
+    fmt.Println("数据错误")
+  }
+  fmt.Println(body)
+  fmt.Println(reflect.TypeOf(body))
   return c.Render(200, r.JSON(c.Params()))
 }
+
