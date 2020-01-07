@@ -219,8 +219,6 @@ func AttachmentsAdd(c buffalo.Context) error {
     fmt.Printf("read body err, %v\n", err)
     return nil
   }
-  println("json:", string(body))
-
   var a Res
   if err = json.Unmarshal(body, &a); err != nil {
     fmt.Printf("Unmarshal err, %v\n", err)
@@ -230,7 +228,10 @@ func AttachmentsAdd(c buffalo.Context) error {
   // println(aString)
   token := a.Upload.Meta.Token
   uid := a.Upload.Meta.UserID
+  fmt.Println("打印 token")
   fmt.Println(token)
+  fmt.Println("打印 uid")
+  fmt.Println(uid)
   ValidateToken(uid, token)
   return c.Render(200, r.JSON(c.Params()))
 }
@@ -275,7 +276,10 @@ func ValidateToken(uid uuid.UUID, token uuid.UUID) bool {
   if err != nil {
     return false
   }
-  a := conn.Send("GET", uid)
+  a, err := redis.String(conn.Do("GET", uid))
+  if err != nil {
+    return false
+  }
   fmt.Println("打印数据的值 a")
   fmt.Println(a)
   defer conn.Close()
