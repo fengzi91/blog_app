@@ -223,7 +223,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println("Header 数据")
   fmt.Println(c.Request().Header)
   countryCapitalMap := map[string]string{}
-  jsonData := json.NewDecoder(c.Request().Body).Decode(countryCapitalMap)
+  jsonData := json.NewDecoder(c.Request().Body).Decode(&countryCapitalMap)
   fmt.Println(jsonData)
   return c.Render(200, r.JSON(c.Params()))
 }
