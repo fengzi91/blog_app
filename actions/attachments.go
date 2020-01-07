@@ -213,7 +213,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println(c.Request().Body)
 
   jsonData := json.NewDecoder(c.Request().Body)
-  fmt.Println(jsonData)
-  
+  fmt.Println(*jsonData)
+
   return c.Render(200, r.JSON(c.Params()))
 }
