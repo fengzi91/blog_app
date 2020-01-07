@@ -29,6 +29,12 @@ func PostsIndex(c buffalo.Context) error {
 //Inserted
 func PostsCreateGet(c buffalo.Context) error {
 	c.Set("post", &models.Post{})
+	user := c.Value("current_user").(*models.User)
+	token, err := GenerateToken(user.ID)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	c.Set("upload-token", token)
 	return c.Render(200, r.HTML("posts/create"))
 }
 

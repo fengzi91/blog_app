@@ -163,7 +163,8 @@
             proudlyDisplayPoweredByUppy: false
         })
         uppy.setMeta({
-            token: 'aabbcc44555'
+            uid: '<%= current_user.ID %>',
+            token: '<%= token %>'
         })
         uppy.use(Uppy.Tus, {
             endpoint: 'http://180.76.121.158:1080/files',
