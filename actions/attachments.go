@@ -232,7 +232,12 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println(token)
   fmt.Println("打印 uid")
   fmt.Println(uid)
-  ValidateToken(uid, token)
+  bools := ValidateToken(uid, token)
+  if bools {
+    fmt.Println("可以上传")
+  } else {
+    fmt.Println("不能上传")
+  }
   return c.Render(200, r.JSON(c.Params()))
 }
 
@@ -273,6 +278,7 @@ func GenerateToken(uid uuid.UUID) (token uuid.UUID, err error) {
 
 func ValidateToken(uid uuid.UUID, token uuid.UUID) bool {
   conn, err := redis.Dial("tcp", ":6379")
+  defer conn.Close()
   if err != nil {
     return false
   }
@@ -280,9 +286,9 @@ func ValidateToken(uid uuid.UUID, token uuid.UUID) bool {
   if err != nil {
     return false
   }
-  fmt.Println("打印数据的值 a")
-  fmt.Println(a)
-  defer conn.Close()
-  return true
+  if uuid.FromStringOrNil(a) == token {
+    return true
+  }
+  return false
 }
 
