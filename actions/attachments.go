@@ -1,6 +1,7 @@
 package actions
 
 import (
+  "bytes"
   "encoding/json"
   "fmt"
   "github.com/fengzi91/blog_app/models"
@@ -212,21 +213,13 @@ func AttachmentsAdd(c buffalo.Context) error {
   */
 
   fmt.Println(c.Request().Body)
-
-
-  body, err := ioutil.ReadAll(c.Request().Body)
+  body, err := ioutil.ReadAll(r.Body)
   if err != nil {
-    fmt.Println("数据错误")
+    fmt.Printf("read body err, %v\n", err)
+    return nil
   }
-  fmt.Println(body)
-  fmt.Println(reflect.TypeOf(body))
-  fmt.Println("Header 数据")
-  fmt.Println(c.Request().Header["Content-Type"])
-  j, errs := json.Marshal(body)
-  if errs != nil {
-    fmt.Println("json 数据错误")
-  }
-  fmt.Println(j)
+  println("json:", string(body))
+
   return c.Render(200, r.JSON(c.Params()))
 }
 
