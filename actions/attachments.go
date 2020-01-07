@@ -1,6 +1,7 @@
 package actions
 
 import (
+  "encoding/json"
   "fmt"
   "github.com/fengzi91/blog_app/models"
   "github.com/gobuffalo/buffalo"
@@ -219,6 +220,12 @@ func AttachmentsAdd(c buffalo.Context) error {
   }
   fmt.Println(body)
   fmt.Println(reflect.TypeOf(body))
+  p := make([]byte, 256)
+  errs := json.NewDecoder(c.Request().Body).Decode(p)
+  if errs != nil {
+    fmt.Println("数据错误")
+  }
+  fmt.Println(p)
   return c.Render(200, r.JSON(c.Params()))
 }
 
