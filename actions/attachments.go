@@ -222,9 +222,12 @@ func AttachmentsAdd(c buffalo.Context) error {
   if errs != nil {
     fmt.Println("JsonToMapDemo err: ", errs)
   }
-  for i, k := range mapResult {
-    println(i, k)
+  aInterface := mapResult["Upload"].([]interface{})
+  aString := make([]string, len(aInterface))
+  for i, v := range aInterface {
+    aString[i] = v.(string)
   }
+  println(aString)
   return c.Render(200, r.JSON(c.Params()))
 }
 
