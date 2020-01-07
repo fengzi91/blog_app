@@ -230,7 +230,6 @@ func AttachmentsAdd(c buffalo.Context) error {
 
 type Res struct {
   Upload      UploadModel  `json:"Upload"`
-  Storage     StorageModel `json:"Storage"`
   HTTPRequest HttpModel `json:"HTTPRequest"`
 }
 type HttpModel struct {
@@ -240,6 +239,8 @@ type StorageModel struct {
   Bucket string `json:"Bucket"`
 }
 type UploadModel struct {
+  ID string `json:"ID"`
+  Storage StorageModel `json:"Storage"`
   Token string `json:"token"`
 }
 
