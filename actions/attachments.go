@@ -210,21 +210,21 @@ func AttachmentsAdd(c buffalo.Context) error {
   }
   */
 
-  fmt.Println(c.Request().Body)
+  // fmt.Println(c.Request().Body)
   body, err := ioutil.ReadAll(c.Request().Body)
   if err != nil {
     fmt.Printf("read body err, %v\n", err)
     return nil
   }
-  println("json:", string(body))
+  // println("json:", string(body))
   var mapResult map[string]interface{}
   errs := json.Unmarshal([]byte(string(body)), &mapResult)
   if errs != nil {
     fmt.Println("JsonToMapDemo err: ", errs)
   }
-  aa := mapResult["Upload"]
-  json.Unmarshal([]byte(aa.(string)), &mapResult)
-  fmt.Println(mapResult)
+  for i, k := range mapResult {
+    println(i, k)
+  }
   return c.Render(200, r.JSON(c.Params()))
 }
 
