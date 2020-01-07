@@ -218,15 +218,24 @@ func AttachmentsAdd(c buffalo.Context) error {
   }
   // println("json:", string(body))
   var mapResult map[string]interface{}
-  errs := json.Unmarshal([]byte(string(body)), &mapResult)
-  if errs != nil {
-    fmt.Println("JsonToMapDemo err: ", errs)
+  if err = json.Unmarshal(body, &mapResult); err != nil {
+    fmt.Println("JsonToMapDemo err: ", err)
   }
-  for _, v := range mapResult["Upload"].([]interface{}) {
-    str := v.(string)
-    fmt.Println(str)
+  var a PushModel
+  if err = json.Unmarshal(body, &a); err != nil {
+    fmt.Printf("Unmarshal err, %v\n", err)
+    return nil
   }
+  fmt.Printf("%+v", a)
   // println(aString)
   return c.Render(200, r.JSON(c.Params()))
+}
+
+type PushModel struct {
+  Token   string `json:"token"`
+  CallbackURL string `json:"callbackuRL"`
+  IP          string `json:"remoteip"`
+  Port        int    `json:"remoteport"`
+  User        string `json:"user"`
 }
 
