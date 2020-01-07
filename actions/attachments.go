@@ -199,3 +199,14 @@ func (v AttachmentsResource) Destroy(c buffalo.Context) error {
   // Redirect to the attachments index page
   return c.Render(200, r.Auto(c, attachment))
 }
+
+func (v AttachmentsResource) Add(c buffalo.Context) error {
+  // attachment := &models.Attachment{}
+  // tx, ok := c.Value("tx").(*pop.Connection)
+  /*
+  if !ok {
+    return fmt.Errorf("no transaction found")
+  }
+  */
+  fmt.Println(c.Params())
+}
