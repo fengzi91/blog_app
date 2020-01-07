@@ -209,6 +209,6 @@ func AttachmentsAdd(c buffalo.Context) error {
   }
   */
 
-  fmt.Println(c.Request())
+  fmt.Println(c.Request().Body)
   return c.Render(200, r.JSON(c.Params()))
 }
