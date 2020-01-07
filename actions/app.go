@@ -103,7 +103,7 @@ func App() *buffalo.App {
 
 		sysGruop.GET("/systemsetting/create", AdminRequired(SystemsettingCreate))
 		sysGruop.GET("/systemsetting/edit", AdminRequired(SystemsettingEdit))
-		app.GET("/attachments/add", AttachmentsAdd)
+		app.POST("/attachments/add", AttachmentsAdd)
 		app.Resource("/attachments", AttachmentsResource{})
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
