@@ -263,7 +263,7 @@ func GenerateToken(uid uuid.UUID) (token uuid.UUID, err error) {
     return token, errors.WithStack(err)
   }
 
-  if _, err := conn.Do("APPEND", uid, token); err != nil {
+  if _, err := conn.Do("SET", uid, token); err != nil {
     return token, errors.WithStack(err)
   }
 
