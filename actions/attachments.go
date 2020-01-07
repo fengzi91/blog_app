@@ -200,7 +200,7 @@ func (v AttachmentsResource) Destroy(c buffalo.Context) error {
   return c.Render(200, r.Auto(c, attachment))
 }
 
-func (v AttachmentsResource) Add(c buffalo.Context) error {
+func AttachmentsAdd(c buffalo.Context) error {
   // attachment := &models.Attachment{}
   // tx, ok := c.Value("tx").(*pop.Connection)
   /*
@@ -209,5 +209,5 @@ func (v AttachmentsResource) Add(c buffalo.Context) error {
   }
   */
   fmt.Println(c.Params())
-  return c.Render(200, r.Auto(c, "OK"))
+  return c.Render(200, r.JSON(c.Params()))
 }
