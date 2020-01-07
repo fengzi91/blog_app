@@ -238,9 +238,12 @@ type HttpModel struct {
 type StorageModel struct {
   Bucket string `json:"Bucket"`
 }
+type MetaDataModel struct {
+  Token string `json:"token"`
+}
 type UploadModel struct {
   ID string `json:"ID"`
   Storage StorageModel `json:"Storage"`
-  Token string `json:"token"`
+  Meta  MetaDataModel `json:"MetaData"`
 }
 
