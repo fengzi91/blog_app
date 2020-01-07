@@ -225,6 +225,8 @@ func AttachmentsAdd(c buffalo.Context) error {
   }
   fmt.Printf("%+v", a)
   // println(aString)
+  token := a.Upload.Meta.Token
+  fmt.Println(token)
   return c.Render(200, r.JSON(c.Params()))
 }
 
