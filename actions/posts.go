@@ -29,8 +29,6 @@ func PostsIndex(c buffalo.Context) error {
 //Inserted
 func PostsCreateGet(c buffalo.Context) error {
 	c.Set("post", &models.Post{})
-	fmt.Println("打印变量")
-	fmt.Println("%+v", c)
 	return c.Render(200, r.HTML("posts/create"))
 }
 
@@ -48,19 +46,6 @@ func PostsCreatePost(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	// Validate the data from the html form
 	post.AuthorID = user.ID
-	// attachment := &models.Attachment{}
-	/*
-	if attachment_id := c.Param("attachment"); attachment_id == "" {
-		if err := tx.Last(attachment); err != nil {
-			return errors.WithStack(err)
-		}
-	} else {
-		if err := tx.Find(attachment, attachment_id); err != nil {
-			return errors.WithStack(err)
-		}
-	}
-	 */
-
 	verrs, err := tx.ValidateAndCreate(post)
 	if err != nil {
 		return errors.WithStack(err)

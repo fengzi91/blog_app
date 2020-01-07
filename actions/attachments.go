@@ -248,4 +248,8 @@ type UploadModel struct {
   Storage StorageModel `json:"Storage"`
   Meta  MetaDataModel `json:"MetaData"`
 }
+func GenerateToken(c buffalo.Context) error {
+  user := c.Value("current_user").(*models.User)
+
+}
 
