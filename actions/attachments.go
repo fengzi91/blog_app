@@ -221,7 +221,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println(body)
   fmt.Println(reflect.TypeOf(body))
   fmt.Println("Header 数据")
-  fmt.Println(c.Request().Header)
+  fmt.Println(c.Request().Header["Content-Type"])
   j, errs := json.Marshal(body)
   if errs != nil {
     fmt.Println("json 数据错误")
