@@ -1,7 +1,7 @@
 package actions
 
 import (
-
+  "encoding/json"
   "fmt"
   "github.com/fengzi91/blog_app/models"
   "github.com/gobuffalo/buffalo"
@@ -217,7 +217,12 @@ func AttachmentsAdd(c buffalo.Context) error {
     return nil
   }
   println("json:", string(body))
-
+  var mapResult map[string]interface{}
+  errs := json.Unmarshal([]byte(string(body)), &mapResult)
+  if errs != nil {
+    fmt.Println("JsonToMapDemo err: ", errs)
+  }
+  fmt.Println(mapResult)
   return c.Render(200, r.JSON(c.Params()))
 }
 
