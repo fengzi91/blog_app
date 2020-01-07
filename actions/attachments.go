@@ -216,7 +216,7 @@ func AttachmentsAdd(c buffalo.Context) error {
     fmt.Printf("read body err, %v\n", err)
     return nil
   }
-  // println("json:", string(body))
+  println("json:", string(body))
 
   var a Res
   if err = json.Unmarshal(body, &a); err != nil {
