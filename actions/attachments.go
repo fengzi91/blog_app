@@ -222,9 +222,11 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println(reflect.TypeOf(body))
   fmt.Println("Header 数据")
   fmt.Println(c.Request().Header)
-  countryCapitalMap := map[string]string{}
-  jsonData := json.NewDecoder(c.Request().Body).Decode(&countryCapitalMap)
-  fmt.Println(jsonData)
+  j, errs := json.Marshal(body)
+  if errs != nil {
+    fmt.Println("json 数据错误")
+  }
+  fmt.Println(j)
   return c.Render(200, r.JSON(c.Params()))
 }
 
