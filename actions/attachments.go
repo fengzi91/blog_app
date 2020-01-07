@@ -229,7 +229,9 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Printf("%+v", a)
   // println(aString)
   token := a.Upload.Meta.Token
+  uid := a.Upload.Meta.UserID
   fmt.Println(token)
+  ValidateToken(uid, token)
   return c.Render(200, r.JSON(c.Params()))
 }
 
@@ -244,7 +246,8 @@ type StorageModel struct {
   Bucket string `json:"Bucket"`
 }
 type MetaDataModel struct {
-  Token string `json:"token"`
+  Token uuid.UUID `json:"token"`
+  UserID uuid.UUID `json:"uid"`
 }
 type UploadModel struct {
   ID string `json:"ID"`
@@ -265,5 +268,17 @@ func GenerateToken(uid uuid.UUID) (token uuid.UUID, err error) {
 
   defer conn.Close()
   return token, nil
+}
+
+func ValidateToken(uid uuid.UUID, token uuid.UUID) bool {
+  conn, err := redis.Dial("tcp", ":6379")
+  if err != nil {
+    return false
+  }
+  a := conn.Send("GET", uid)
+  fmt.Println("打印数据的值 a")
+  fmt.Println(a)
+  defer conn.Close()
+  return true
 }
 

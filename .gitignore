@@ -14,3 +14,4 @@ blog_app
 .env
 database.yml
 public/uploads/*.*
+go.mod
