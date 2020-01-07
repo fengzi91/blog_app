@@ -217,10 +217,7 @@ func AttachmentsAdd(c buffalo.Context) error {
     return nil
   }
   // println("json:", string(body))
-  var mapResult map[string]interface{}
-  if err = json.Unmarshal(body, &mapResult); err != nil {
-    fmt.Println("JsonToMapDemo err: ", err)
-  }
+
   var a Res
   if err = json.Unmarshal(body, &a); err != nil {
     fmt.Printf("Unmarshal err, %v\n", err)
@@ -232,7 +229,7 @@ func AttachmentsAdd(c buffalo.Context) error {
 }
 
 type Res struct {
-  Upload      UploadModel  `json:"upload"`
+  Upload      UploadModel  `json:"Upload"`
 }
 type UploadModel struct {
   Token string `json:"token"`
