@@ -169,7 +169,14 @@
                 { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
             ]
         })
-        .use(Uppy.Tus, {endpoint: 'http://180.76.121.158:1080/files'})
+        .use(Uppy.Tus, {
+            endpoint: 'http://180.76.121.158:1080/files',
+            headers: {
+                'Upload-Metadata': {
+                    token:"dsadasdsa这是 token 数据",
+                }
+            }
+        })
         uppy.on('complete', (result) => {
             // 文件上传成功以后，将文件地址保存，同表单一同提交（可扩展为用户相册功能）
             console.log('Upload complete! We’ve uploaded these files:', result.successful)
