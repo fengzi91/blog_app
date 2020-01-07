@@ -221,7 +221,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   if err = json.Unmarshal(body, &mapResult); err != nil {
     fmt.Println("JsonToMapDemo err: ", err)
   }
-  var a PushModel
+  var a Res
   if err = json.Unmarshal(body, &a); err != nil {
     fmt.Printf("Unmarshal err, %v\n", err)
     return nil
@@ -231,11 +231,10 @@ func AttachmentsAdd(c buffalo.Context) error {
   return c.Render(200, r.JSON(c.Params()))
 }
 
-type PushModel struct {
-  Token   string `json:"token"`
-  CallbackURL string `json:"callbackuRL"`
-  IP          string `json:"remoteip"`
-  Port        int    `json:"remoteport"`
-  User        string `json:"user"`
+type Res struct {
+  Upload      UploadModel  `json:"upload"`
+}
+type UploadModel struct {
+  Token string `json:"token"`
 }
 
