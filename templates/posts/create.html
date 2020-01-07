@@ -164,7 +164,7 @@
         })
         uppy.setMeta({
             uid: '<%= current_user.ID %>',
-            token: '<%= token %>'
+            token: '<%= upload-token %>'
         })
         uppy.use(Uppy.Tus, {
             endpoint: 'http://180.76.121.158:1080/files',
