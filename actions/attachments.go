@@ -208,6 +208,7 @@ func AttachmentsAdd(c buffalo.Context) error {
     return fmt.Errorf("no transaction found")
   }
   */
-  fmt.Println(c.Data())
+
+  fmt.Println(c.Request())
   return c.Render(200, r.JSON(c.Params()))
 }
