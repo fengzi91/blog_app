@@ -44,10 +44,16 @@
         </form>
     </div>
 </div>
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css" />
-<script src="https://uicdn.toast.com/tui-editor/latest/tui-editor-Editor-full.js"></script>
+<div id="drag-drop-area"></div>
+<div id="upload-btn" class="upload-btn">
+    <button class="btn btn-primary">上传文件</button>
+</div>
+<link href="https://zys-blog.cdn.bcebos.com/assets/uppy/uppy.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor.css" />
+<link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor-contents.css" />
+<link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/codemirror.css" />
+<script src="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor-Editor-full.min.js"></script>
+
 <script>
     var url = '<%= attachmentsPath() %>'
 
@@ -131,4 +137,36 @@
         }
         return false;
     }
+</script>
+<script src="https://zys-blog.cdn.bcebos.com/assets/uppy/uppy.min.js"></script>
+<script src="https://zys-blog.cdn.bcebos.com/assets/uppy/zh_CN.min.js"></script>
+<script>
+    var uppy = Uppy.Core()
+        .use(Uppy.Dashboard, {
+            inline: false,
+            target: '#drag-drop-area',
+            locale: Uppy.locales.zh_CN,
+            replaceTargetContent: true,
+            showProgressDetails: true,
+            trigger: '#upload-btn',
+            closeModalOnClickOutside: true,
+            metaFields: [
+                { id: 'name', name: 'Name', placeholder: 'file name' },
+                { id: 'attachment_id', name: '附件ID', placeholder: '' },
+                { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+            ],
+            proudlyDisplayPoweredByUppy: false
+        })
+    uppy.setMeta({
+        uid: '<%= current_user.ID %>',
+        token: '<%= upload-token %>'
+    })
+    uppy.use(Uppy.Tus, {
+        endpoint: 'http://180.76.121.158:1080/files',
+    })
+    uppy.on('complete', (result) => {
+        // 文件上传成功以后，将文件地址保存，同表单一同提交（可扩展为用户相册功能）
+        console.log('Upload complete! We’ve uploaded these files:', result.successful)
+    })
+
 </script>
