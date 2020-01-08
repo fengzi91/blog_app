@@ -233,10 +233,8 @@ func AttachmentsAdd(c buffalo.Context) error {
   fmt.Println("打印 uid")
   fmt.Println(uid)
   bools := ValidateToken(uid, token)
-  if bools {
-    fmt.Println("可以上传")
-  } else {
-    fmt.Println("不能上传")
+  if !bools {
+    return c.Render(500, r.HTML("没有权限上传文件"))
   }
   return c.Render(200, r.JSON(c.Params()))
 }
