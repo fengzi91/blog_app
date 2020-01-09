@@ -44,7 +44,6 @@
             </div>
 
             <textarea style="display:none;" name="Content" id="content"><%= post.Content %></textarea>
-            <input type="hidden" name="TopImageID" id="attachment" value="0393a648-5a61-4954-8fe6-a13e8de97b23"/>
             <button type="submit" class="btn btn-primary" id="submit">Publish</button>
         </form>
     </div>
@@ -171,9 +170,14 @@
         uppy.use(Uppy.Tus, {
             endpoint: 'http://180.76.121.158:1080/files',
         })
+        /*uppy.use(Uppy.Url, {
+            target: Uppy.Dashboard,
+            companionUrl: 'https://companion.uppy.io/',
+            locale: {}
+        })*/
         uppy.on('complete', (result) => {
             // 文件上传成功以后，将文件地址保存，同表单一同提交（可扩展为用户相册功能）
-            console.log('Upload complete! We’ve uploaded these files:', result.successful)
+            console.log('Upload complete! We’ve uploaded these files:', result)
             var top_image = $('#attachment').val()
             if (!top_image) {
                 $('#attachment').val()
