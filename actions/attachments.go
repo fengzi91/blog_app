@@ -249,7 +249,7 @@ func AttachmentsAdd(c buffalo.Context) error {
 
     // Render again the new.html template that the user can
     // correct the input.
-    return c.Render(422, r.JSON(attachment))
+    return c.Error(500, errors.New("文件保存附件失败!"))
   }
   return c.Render(200, r.JSON(attachment))
 }
