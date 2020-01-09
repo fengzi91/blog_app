@@ -238,19 +238,9 @@ func AttachmentsAdd(c buffalo.Context) error {
     return fmt.Errorf("no transaction found")
   }
   attachment := models.Attachment{UserID: uid, Url: "https://zys-blog.cdn.bcebos.com/" + a.Upload.Storage.Key, Size: a.Upload.Size}
-  verrs, err := tx.ValidateAndCreate(attachment)
-  if err != nil {
-    return err
-  }
 
-  if verrs.HasAny() {
-    // Make the errors available inside the html template
-    c.Set("errors", verrs)
-
-    // Render again the new.html template that the user can
-    // correct the input.
-    return c.Error(500, errors.New("文件保存附件失败!"))
-  }
+  p := tx.Create(attachment)
+  fmt.Printf("attachment 数据\n, %v\n", p)
   return c.Render(200, r.JSON(attachment))
 }
 
