@@ -217,7 +217,7 @@ func AttachmentsAdd(c buffalo.Context) error {
     return nil
   }
   fmt.Printf("打印 Header, %v\n", c.Request().Header)
-  fmt.Printf("Http Body 数据\n, %v\n", body)
+  fmt.Printf("Http Body 数据\n, %v\n", c.Request().Body)
   token := a.Upload.Meta.Token
   uid := a.Upload.Meta.UserID
   bools := ValidateToken(uid, token)
