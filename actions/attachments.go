@@ -205,14 +205,6 @@ func (v AttachmentsResource) Destroy(c buffalo.Context) error {
 }
 
 func AttachmentsAdd(c buffalo.Context) error {
-  // attachment := &models.Attachment{}
-  // tx, ok := c.Value("tx").(*pop.Connection)
-  /*
-  if !ok {
-    return fmt.Errorf("no transaction found")
-  }
-  */
-
   // fmt.Println(c.Request().Body)
   body, err := ioutil.ReadAll(c.Request().Body)
   if err != nil {
@@ -224,18 +216,36 @@ func AttachmentsAdd(c buffalo.Context) error {
     fmt.Printf("Unmarshal err, %v\n", err)
     return nil
   }
-  fmt.Printf("%+v", a)
-  // println(aString)
+  fmt.Printf("打印 Header, %v\n", c.Request().Header)
   token := a.Upload.Meta.Token
   uid := a.Upload.Meta.UserID
-  fmt.Println("打印 token")
-  fmt.Println(token)
-  fmt.Println("打印 uid")
-  fmt.Println(uid)
   bools := ValidateToken(uid, token)
   if !bools {
-    return c.Render(500, r.HTML("没有权限上传文件"))
+    // 暂时跳过权限检查
+    return c.Render(200, r.HTML("没有权限上传文件"))
   }
+  /*
+  // 将文件加入 attachments
+  tx, ok := c.Value("tx").(*pop.Connection)
+
+  if !ok {
+    return fmt.Errorf("no transaction found")
+  }
+  attachment := models.Attachment{UserID: uid, Url: a.Upload.Url, Size: a.Upload.Size}
+  verrs, err := tx.ValidateAndCreate(attachment)
+  if err != nil {
+    return err
+  }
+
+  if verrs.HasAny() {
+    // Make the errors available inside the html template
+    c.Set("errors", verrs)
+
+    // Render again the new.html template that the user can
+    // correct the input.
+    return c.Render(422, r.Auto(c, attachment))
+  }
+   */
   return c.Render(200, r.JSON(c.Params()))
 }
 
@@ -257,6 +267,8 @@ type UploadModel struct {
   ID string `json:"ID"`
   Storage StorageModel `json:"Storage"`
   Meta  MetaDataModel `json:"MetaData"`
+  Url string `json:"Url"`
+  Size int64 `json:"Size"`
 }
 func GenerateToken(uid uuid.UUID) (token uuid.UUID, err error) {
   token, _ = uuid.NewV4()

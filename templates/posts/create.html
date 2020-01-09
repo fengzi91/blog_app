@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="title">题图</label>
-                <input type="text" class="form-control" name="attachment_url" placeholder="填写图片地址"/>
+                <input type="text" class="form-control" id="attachment" name="attachment_url" placeholder="填写图片地址"/>
             </div>
             <div class="form-group">
                 <label for="title">摘要</label>
@@ -146,7 +146,9 @@
 <script src="https://zys-blog.cdn.bcebos.com/assets/uppy/uppy.min.js"></script>
 <script src="https://zys-blog.cdn.bcebos.com/assets/uppy/zh_CN.min.js"></script>
 <script>
-    var uppy = Uppy.Core()
+    var uppy = Uppy.Core({
+        autoProceed: true,
+    })
         .use(Uppy.Dashboard, {
             inline: false,
             target: '#drag-drop-area',
@@ -172,6 +174,9 @@
         uppy.on('complete', (result) => {
             // 文件上传成功以后，将文件地址保存，同表单一同提交（可扩展为用户相册功能）
             console.log('Upload complete! We’ve uploaded these files:', result.successful)
+            var top_image = $('#attachment').val()
+            if (!top_image) {
+                $('#attachment').val()
+            }
         })
-
 </script>

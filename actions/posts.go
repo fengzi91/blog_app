@@ -1,7 +1,6 @@
 package actions
 
 import (
-	"fmt"
 	"github.com/fengzi91/blog_app/models"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"
@@ -43,11 +42,9 @@ func PostsCreatePost(c buffalo.Context) error {
 	post := &models.Post{}
 	user := c.Value("current_user").(*models.User)
 	// Bind post to the html form elements
-	fmt.Println("程序运行到此处 ！")
 	if err := c.Bind(post); err != nil {
 		return errors.WithStack(err)
 	}
-	fmt.Println("程序没有运行到此处 已经报错！")
 	// Get the DB connection from the context
 	tx := c.Value("tx").(*pop.Connection)
 	// Validate the data from the html form
@@ -75,6 +72,12 @@ func PostsEditGet(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 	c.Set("post", post)
+	user := c.Value("current_user").(*models.User)
+	token, err := GenerateToken(user.ID)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	c.Set("upload-token", token)
 	return c.Render(200, r.HTML("posts/edit.html"))
 }
 
