@@ -237,7 +237,7 @@ func AttachmentsAdd(c buffalo.Context) error {
   if !ok {
     return fmt.Errorf("no transaction found")
   }
-  attachment := models.Attachment{UserID: uid, Url: "https://zys-blog.cdn.bcebos.com/" + a.Upload.Storage.Key, Size: a.Upload.Size}
+  attachment := &models.Attachment{UserID: uid, Url: "https://zys-blog.cdn.bcebos.com/" + a.Upload.Storage.Key, Size: a.Upload.Size}
 
   p := tx.Create(attachment)
   fmt.Printf("attachment 数据\n, %v\n", p)
