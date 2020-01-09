@@ -180,7 +180,7 @@
             console.log('Upload complete! We’ve uploaded these files:', result)
             var top_image = $('#attachment').val()
             if (!top_image) {
-                $('#attachment').val()
+                $('#attachment').val(result.successful[0] .uploadURL)
             }
         })
 </script>
