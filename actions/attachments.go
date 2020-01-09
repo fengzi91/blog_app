@@ -228,9 +228,9 @@ func AttachmentsAdd(c buffalo.Context) error {
     bools := ValidateToken(uid, token)
     if !bools {
       // 暂时跳过权限检查
-      return c.Render(200, r.HTML("没有权限上传文件"))
+      return c.Render(200, r.String("没有权限上传文件"))
     }
-    return c.Render(200, r.HTML(""))
+    return c.Render(200, r.String("上传文件"))
   }
   tx, ok := c.Value("tx").(*pop.Connection)
 
