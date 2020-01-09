@@ -228,7 +228,7 @@ func AttachmentsAdd(c buffalo.Context) error {
     bools := ValidateToken(uid, token)
     if !bools {
       // 暂时跳过权限检查
-      return c.Render(200, r.String("没有权限上传文件"))
+      return c.Render(500, r.String("没有权限上传文件"))
     }
     return c.Render(200, r.String("上传文件"))
   }
@@ -237,10 +237,9 @@ func AttachmentsAdd(c buffalo.Context) error {
   if !ok {
     return fmt.Errorf("no transaction found")
   }
-  attachment := &models.Attachment{UserID: uid, Url: "https://zys-blog.cdn.bcebos.com/" + a.Upload.Storage.Key, Size: a.Upload.Size}
+  attachment := &models.Attachment{UserID: uid, Url: "/files/" + a.Upload.ID, Size: a.Upload.Size}
 
-  p := tx.Create(attachment)
-  fmt.Printf("attachment 数据\n, %v\n", p)
+  tx.Create(attachment)
   return c.Render(200, r.JSON(attachment))
 }
 
