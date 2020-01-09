@@ -249,9 +249,9 @@ func AttachmentsAdd(c buffalo.Context) error {
 
     // Render again the new.html template that the user can
     // correct the input.
-    return c.Render(422, r.Auto(c, attachment))
+    return c.Render(422, r.JSON(attachment))
   }
-  return c.Render(200, r.Auto(c, attachment))
+  return c.Render(200, r.JSON(attachment))
 }
 
 type Res struct {
