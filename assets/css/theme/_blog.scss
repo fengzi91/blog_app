@@ -23,6 +23,13 @@
 			font-size: 0.8125rem;
 		}
 	}
+	.post-list-title {
+		display: flex;
+		justify-content: space-between;
+		.manage-buttons a {
+			color: #fff;
+		}
+	}
 }
 
 .meta {
@@ -149,7 +156,7 @@
 		
 	}
 }
-.posts-create-page, .posts-edit-page {
+.posts-create-page, .edit-posts-page {
 	.post-edit-top-image {
 		width: 176px;
 		height: 176px;

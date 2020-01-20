@@ -3,9 +3,19 @@
       <%= for(p) in posts { %>
       <div class="item mb-5">
         <div class="media">
-          <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="<%= p.TopImage.Url %>" alt="image">
-          <div class="media-body">
-            <h3 class="title mb-1"><a href="<%= postsDetailPath({pid: p.ID}) %>"><%= p.Title %></a></h3>
+            <%= if (len(p.TopImage) > 0) { %>
+            <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="<%= p.TopImage %>" alt="image">
+            <% } %>
+            <div class="media-body">
+            <h3 class="title mb-1 post-list-title">
+                <a href="<%= postsDetailPath({pid: p.ID}) %>"><%= p.Title %></a>
+                <%= if (current_user.Admin) { %>
+                <div class="manage-buttons">
+                    <a href="<%= editPostsPath({pid: p.ID}) %>" class="btn btn-primary mr-2">Edit Post</a>
+                    <a href="javascript:void(0);"onclick="deletePost('<%= postsDeletePath({pid: p.ID}) %>');" class="btn btn-danger">Delete Post</a>
+                </div>
+                <% } %>
+            </h3>
             <div class="meta mb-1"><span class="date">Published <%= formatDate(p.CreatedAt) %></span><span class="time"><%= p.Author.Username %></span><span class="comment"><a href="#">8 comments</a></span></div>
             <%= if (len(p.Subject) > 0) { %>
               <div class="intro"><%= html(truncate(p.Content, {"size": 200})) %></div>

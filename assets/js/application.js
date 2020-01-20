@@ -1,14 +1,6 @@
 const $ = require("expose-loader?$!expose-loader?jQuery!jquery");
 require("bootstrap/dist/js/bootstrap.bundle.js");
-// const hljs = require("highlight.js/lib/");
 const sweetAlert = require("sweetalert");
-// const Editor = require('tui-editor');
-/*
-hljs.registerLanguage('html', require('highlight.js/lib/languages/haml'));
-hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
-hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
-hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
- */
 $(() => {
     $(document).scroll(function(){
         if ($(this).scrollTop() >= 260) {
@@ -65,3 +57,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         hljs.highlightBlock(block);
     });
 });
+window.deletePost = function (id) {
+    swal("确定要删除这篇文章吗?", {
+        buttons: ["取消", "确认"],
+    }).then((val) => {
+        if (val) {
+            $.get(id).then(() => {
+                window.location.href = '/'
+            })
+        }
+    });
+}
+window.deleteComment = function (id) {
+    swal("确定要删除这条评论吗?", {
+        buttons: ["取消", "确认"],
+    }).then((val) => {
+        if (val) {
+            $.get(id).then(() => {
+                window.location.reload()
+            })
+        }
+    });
+}

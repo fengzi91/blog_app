@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "posts" (
 "category_id" char(36) NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
-, "attachment_id" char(36) NOT NULL DEFAULT '0393a648-5a61-4954-8fe6-a13e8de97b23', "subject" TEXT NOT NULL DEFAULT '');
+, "attachment_id" char(36) NOT NULL DEFAULT '0393a648-5a61-4954-8fe6-a13e8de97b23', "subject" TEXT NOT NULL DEFAULT '', "top_image_url" TEXT NOT NULL DEFAULT '');
 CREATE TABLE IF NOT EXISTS "comments" (
 "id" TEXT PRIMARY KEY,
 "content" TEXT NOT NULL,

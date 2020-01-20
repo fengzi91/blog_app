@@ -1,0 +1,1 @@
+add_column("posts", "top_image_url", "string", {"default": ""})

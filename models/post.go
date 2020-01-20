@@ -21,7 +21,7 @@ type Post struct {
 	CategoryID  uuid.UUID `json:"category_id" db:"category_id"`
 	Category  Category  `belongs_to:"category"`
 	TopImageID uuid.UUID `json:"attachment_id" db:"attachment_id"`
-	TopImage Attachment `belongs_to:"attachment"`
+	TopImage string `json:"top_image_url" db:"top_image_url" form:"attachment_url"`
 }
 
 type Posts []Post

@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col">
         <%= if (errors) { %>
-            <%= for (key, val) in errors { %>
-                <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
-                    <%= val %>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <% } %>
+        <%= for (key, val) in errors { %>
+        <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
+            <%= val %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <% } %>
         <% } %>
     </div>
 </div>
-<div class="row mt-3 justify-content-center">
-    <div class="col-md-8 col-sm-10">
-        <h2>Edit this post</h2>
-        <form action="<%= editPostsPath({pid: post.ID}) %>" method="POST">
+<div class="row m-3 justify-content-center">
+    <div class="col-md-8 col-sm-10" style="position: relative;">
+        <h2>Create a new post</h2>
+        <form action="<%= postsCreatePath() %>" method="POST" enctype="multipart/form-data" id="form">
             <%= csrf() %>
             <div class="form-group">
                 <label for="title">Title</label>
@@ -26,34 +26,39 @@
                 <select class="form-control" id="category" name="CategoryID">
                     <option value="0">请选择分类</option>
                     <%= for (c) in _categories { %>
-                        <%= if (c.ID.String() == post.CategoryID.String()) { %>
-                        <option value="<%= c.ID %>" selected><%= c.Name %></option>
-                        <% } else { %>
-                        <option value="<%= c.ID %>" ><%= c.Name %></option>
-                        <% } %>
+                    <option value="<%= c.ID %>"><%= c.Name %></option>
                     <% } %>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="title">题图</label>
+                <input type="text" value="<%= post.TopImage %>" class="form-control" id="attachment" name="attachment_url" placeholder="填写图片地址"/>
+            </div>
+            <div class="form-group">
+                <label for="title">摘要</label>
+                <textarea name="Subject" class="form-control" id="subject"><%= post.Subject %></textarea>
             </div>
             <div class="form-group" style="z-index: 9; position: relative;">
                 <label for="content">Content</label>
                 <div id="editSection"></div>
             </div>
+
             <textarea style="display:none;" name="Content" id="content"><%= post.Content %></textarea>
-            <input type="hidden" name="TopImageID" id="attachment" value="0393a648-5a61-4954-8fe6-a13e8de97b23"/>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary" id="submit">Publish</button>
         </form>
     </div>
 </div>
+<!--文件上传-->
 <div id="drag-drop-area"></div>
 <div id="upload-btn" class="upload-btn">
     <button class="btn btn-primary">上传文件</button>
 </div>
+<!--文件结束-->
 <link href="https://zys-blog.cdn.bcebos.com/assets/uppy/uppy.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor.css" />
 <link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor-contents.css" />
 <link rel="stylesheet" href="https://zys-blog.cdn.bcebos.com/assets/tui-editor/codemirror.css" />
 <script src="https://zys-blog.cdn.bcebos.com/assets/tui-editor/tui-editor-Editor-full.min.js"></script>
-
 <script>
     var url = '<%= attachmentsPath() %>'
 
@@ -78,7 +83,6 @@
         initialEditType: 'markdown',
         previewStyle: 'vertical',
         height: '300px',
-        initialValue: document.querySelector('#content').value,
         hooks: {
             addImageBlobHook: (fileOrBlob, callback, source) => {
                 uploadImage(fileOrBlob).then(res => {
@@ -141,7 +145,9 @@
 <script src="https://zys-blog.cdn.bcebos.com/assets/uppy/uppy.min.js"></script>
 <script src="https://zys-blog.cdn.bcebos.com/assets/uppy/zh_CN.min.js"></script>
 <script>
-    var uppy = Uppy.Core()
+    var uppy = Uppy.Core({
+        autoProceed: true,
+    })
         .use(Uppy.Dashboard, {
             inline: false,
             target: '#drag-drop-area',
@@ -164,9 +170,17 @@
     uppy.use(Uppy.Tus, {
         endpoint: 'http://180.76.121.158:1080/files',
     })
+    /*uppy.use(Uppy.Url, {
+        target: Uppy.Dashboard,
+        companionUrl: 'https://companion.uppy.io/',
+        locale: {}
+    })*/
     uppy.on('complete', (result) => {
         // 文件上传成功以后，将文件地址保存，同表单一同提交（可扩展为用户相册功能）
-        console.log('Upload complete! We’ve uploaded these files:', result.successful)
+        console.log('Upload complete! We’ve uploaded these files:', result)
+        var top_image = $('#attachment').val()
+        if (!top_image) {
+            $('#attachment').val(result.successful[0] .uploadURL)
+        }
     })
-
 </script>

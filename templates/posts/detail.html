@@ -66,27 +66,6 @@
 </article>
 
 <script>
-    function deletePost(id) {
-        swal("确定要删除这篇文章吗?", {
-            buttons: ["取消", "确认"],
-        }).then((val) => {
-            if (val) {
-                $.get(id).then(() => {
-                    window.location.href = '<%= postsIndexPath() %>'
-                })
-            }
-        });
-    }
-    function deleteComment(id) {
-        swal("确定要删除这条评论吗?", {
-            buttons: ["取消", "确认"],
-        }).then((val) => {
-            if (val) {
-                $.get(id).then(() => {
-                    window.location.reload()
-                })
-            }
-        });
-    }
+
 </script>
 
