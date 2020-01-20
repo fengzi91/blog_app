@@ -26,7 +26,7 @@
                 <select class="form-control" id="category" name="CategoryID">
                     <option value="0">请选择分类</option>
                     <%= for (c) in _categories { %>
-                    <option value="<%= c.ID %>"><%= c.Name %></option>
+                    <option value="<%= c.ID %>" <%= if (post.CategoryID.String() == c.ID.String()) { %>selected<% } %>><%= c.Name %></option>
                     <% } %>
                 </select>
             </div>
@@ -83,6 +83,7 @@
         initialEditType: 'markdown',
         previewStyle: 'vertical',
         height: '300px',
+        initialValue: document.querySelector('#content').value,
         hooks: {
             addImageBlobHook: (fileOrBlob, callback, source) => {
                 uploadImage(fileOrBlob).then(res => {

@@ -101,24 +101,30 @@
 		font-size: 2rem;
 	}
 	.blog-post-body {
+		color: $gray-600;
 		p, li {
 			font-size: 1rem;
 			line-height: 1.6;
 		}
+		h1, h2, h3, h4 {
+			margin-bottom: 1rem;
+		}
         h1 {
-	        font-size: 2.125rem;
+	        font-size: 2rem;
+			color: $gray-900;
         }
         h2 {
-	        font-size: 2rem;
+	        font-size: 1.5rem;
+			color: $gray-900;
         }
         h3 {
-	        font-size: 1.75rem;
+	        font-size: 1.25rem;
         }
         h4 {
-	        font-size: 1.5rem;
+	        font-size: 1.25rem;
         }
         h5 {
-	        font-size: 1.25rem;
+	        font-size: 1.125rem;
         }
         h6 {
 	        font-size: 1.125rem;
