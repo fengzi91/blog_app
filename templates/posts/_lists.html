@@ -18,8 +18,8 @@
             </h3>
             <div class="meta mb-1"><span class="date">Published <%= formatDate(p.CreatedAt) %></span><span class="time"><%= p.Author.Username %></span><span class="comment"><a href="#">8 comments</a></span></div>
             <%= if (len(p.Subject) > 0) { %>
-              <div class="intro"><%= html(truncate(p.Content, {"size": 200})) %></div>
-            <a class="more-link" href="<%= postsDetailPath({pid: p.ID}) %>">查看更多 &rarr;</a>
+                <div class="intro"><%= subBody(p.Content, 0, 50) %></div>
+                <a class="more-link" href="<%= postsDetailPath({pid: p.ID}) %>">查看更多 &rarr;</a>
               <% } %>
           </div>
         </div>

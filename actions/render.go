@@ -30,6 +30,22 @@ func init() {
 			"html": func(s string) template.HTML {
 				return template.HTML(s)
 			},
+			"subBody": func(str string, begin, length int) template.HTML {
+				rs := []rune(str)
+				lth := len(rs)
+					if begin < 0 {
+					begin = 0
+				}
+					if begin >= lth {
+					begin = lth
+				}
+					end := begin + length
+
+					if end > lth {
+					end = lth
+				}
+				return template.HTML(string(rs[begin:end]))
+			},
 		},
 	})
 }
