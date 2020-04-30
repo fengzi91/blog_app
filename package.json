@@ -16,7 +16,7 @@
     "bootstrap": "4.3.1",
     "editor.md": "^1.5.0",
     "highlight.js": "^9.17.1",
-    "jquery": "~3.4.1",
+    "jquery": "~3.5.0",
     "jquery-ujs": "~1.2.2",
     "popper.js": "^1.14.4",
     "sweetalert": "^2.1.2",
