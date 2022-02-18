@@ -787,12 +787,13 @@
   integrity sha1-QAe4Tm7vJLPwew/lRXVIOGzqd9k=
 
 "@uppy/thumbnail-generator@^1.5.1":
-  version "1.5.0"
-  resolved "https://registry.npm.taobao.org/@uppy/thumbnail-generator/download/@uppy/thumbnail-generator-1.5.0.tgz#5ba83287f6f0c81929f0a3243eb5c91c630c44ae"
-  integrity sha1-W6gyh/bwyBkp8KMkPrXJHGMMRK4=
+  version "1.7.11"
+  resolved "https://registry.yarnpkg.com/@uppy/thumbnail-generator/-/thumbnail-generator-1.7.11.tgz#c6f49be90469f220a419ac43c129bf835cc11c41"
+  integrity sha512-qo9ZD8ByDMM6gIJ4JPN0V/dWlruYMhmYifhUvDUu0qhPAOTJAqh2hLQ+dlmUXTns8RnDorCXScreICSQ09FuLQ==
   dependencies:
-    "@uppy/utils" "^2.1.0"
-    exif-js "2.3.0"
+    "@uppy/utils" "^3.6.2"
+    exifr "^6.0.0"
+    math-log2 "^1.0.1"
 
 "@uppy/tus@^1.5.1":
   version "1.5.1"
@@ -803,17 +804,37 @@
     "@uppy/utils" "^2.1.1"
     tus-js-client "^1.8.0-2"
 
-"@uppy/utils@^2.1.0", "@uppy/utils@^2.1.1":
+"@uppy/utils@^2.1.0":
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/@uppy/utils/download/@uppy/utils-2.1.0.tgz#2f8c20288906f05310e52c6b681715ec25f2bd68"
   integrity sha1-L4wgKIkG8FMQ5SxraBcV7CXyvWg=
   dependencies:
     lodash.throttle "^4.1.1"
 
+"@uppy/utils@^2.1.1":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-2.4.4.tgz#29520cdfaf926af58828a9c141cb7b0fa43f8bc4"
+  integrity sha512-7A0uwK5Rf8XcKqlpNUZ5L5LmkHT5c0/UWjDJGwmzeCxp2lECgzsMC+4vgA6kT4sFzPFbLtUtxHi7ecFwow3NQQ==
+  dependencies:
+    lodash.throttle "^4.1.1"
+
+"@uppy/utils@^3.6.2":
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-3.6.2.tgz#78b02455b9c469d927d22736be5b68cda2600826"
+  integrity sha512-wGTZma7eywIojfuE1vXlT0fxPSpmCRMkfgFWYc+6TL2FfGqWInmePoB+yal6/M2AnjeKHz6XYMhIpZkjOxFvcw==
+  dependencies:
+    abortcontroller-polyfill "^1.4.0"
+    lodash.throttle "^4.1.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha1-+PLIh60Qv2f2NPAFtph/7TF5qsg=
+
+abortcontroller-polyfill@^1.4.0:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.3.tgz#1b5b487bd6436b5b764fd52a612509702c3144b5"
+  integrity sha512-zetDJxd89y3X99Kvo4qFx8GKlt6GsvN3UcRZHwU6iFA/0KiOmhkTVhe8oRoTBiTVPZu09x3vCra47+w8Yz1+2Q==
 
 acorn-dynamic-import@^3.0.0:
   version "3.0.0"
@@ -2012,10 +2033,10 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-exif-js@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.npm.taobao.org/exif-js/download/exif-js-2.3.0.tgz#9d10819bf571f873813e7640241255ab9ce1a814"
-  integrity sha1-nRCBm/Vx+HOBPnZAJBJVq5zhqBQ=
+exifr@^6.0.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/exifr/-/exifr-6.3.0.tgz#ba6a49c0a30372a969d109684e1cd8450a05ba43"
+  integrity sha512-NCSOP15py+4QyvD90etFN0QOVj12ygVE8kfEDG8GDc+SXf9YAOxua2x5kGp6WvxbGjufA5C3r/1ZKHOpHbEWFg==
 
 expand-brackets@^2.1.4:
   version "2.1.4"
@@ -3194,6 +3215,11 @@ markdown-it@^9.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
+math-log2@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/math-log2/-/math-log2-1.0.1.tgz#fb8941be5f5ebe8979e718e6273b178e58694565"
+  integrity sha1-+4lBvl9evol55xjmJzsXjlhpRWU=
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.npm.taobao.org/md5.js/download/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -4108,9 +4134,9 @@ querystring@0.2.0:
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
 
 querystringify@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.npm.taobao.org/querystringify/download/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
-  integrity sha1-YOWl/WSn+L+k0qsu1v30yFutFU4=
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
+  integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
@@ -4330,7 +4356,7 @@ require-main-filename@^1.0.1:
 
 requires-port@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.npm.taobao.org/requires-port/download/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+  resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
 resize-observer-polyfill@^1.5.0:
@@ -5183,9 +5209,9 @@ url-loader@~1.1.1:
     schema-utils "^1.0.0"
 
 url-parse@^1.4.3:
-  version "1.4.7"
-  resolved "https://registry.npm.taobao.org/url-parse/download/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
-  integrity sha1-qKg1NejACjFuQDpdtKwbm4U64ng=
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.7.tgz#00780f60dbdae90181f51ed85fb24109422c932a"
+  integrity sha512-HxWkieX+STA38EDk7CE9MEryFeHCKzgagxlGvsdS7WBImq9Mk+PGwiT56w82WI3aicwJA8REp42Cxo98c8FZMA==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
